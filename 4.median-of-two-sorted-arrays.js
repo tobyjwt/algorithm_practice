@@ -74,7 +74,32 @@ var findMedianSortedArrays3 = function (nums1, nums2) {
     return 0;
 };
 
-
+const findMedianSortedArrays4 = (nums1, nums2) => {
+    if (nums1.length > nums2.length) [nums1, nums2] = [nums2, nums1];
+    const length1 = nums1.length;
+    const length2 = nums2.length;
+    let min = 0;
+    let max = length1;
+    let i = (min + max) >>> 1;
+    let j = (length1 + length2 + 1) >>> 1 - i;
+    while (min <= max) {
+        let leftMax1 = i === 0 ? -Number.POSITIVE_INFINITY : nums1[i - 1];
+        let rightMin1 = i === length1 ? Number.POSITIVE_INFINITY : nums1[i];
+        let leftMax2 = j === 0 ? -Number.POSITIVE_INFINITY : nums2[j - 1];
+        let rightMin2 = j === length2 ? Number.POSITIVE_INFINITY : nums2[j];
+        if (leftMax1 <= rightMin2 && leftMax2 <= rightMin1) {
+            if (((length1 + length2) & 1) === 1) {
+                return Math.max(leftMax1, leftMax2);
+            } else {
+                return (Math.max(leftMax1, leftMax2) + Math.min(rightMin1, rightMin2)) / 2;
+            }
+        } else if (leftMax2 > rightMin1) {
+            min = i + 1;
+        } else {
+            max = i - 1;
+        }
+    }
+};
 
 const nums1 = [1,2,3,4,5];
 const nums2 = [3,4,5,6,9];
@@ -82,3 +107,4 @@ const nums2 = [3,4,5,6,9];
 console.log(findMedianSortedArrays1(nums1, nums2));
 console.log(findMedianSortedArrays2(nums1, nums2));
 console.log(findMedianSortedArrays3(nums1, nums2));
+console.log(findMedianSortedArrays4(nums1, nums2));
