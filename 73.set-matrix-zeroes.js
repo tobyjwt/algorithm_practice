@@ -10,30 +10,75 @@
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
 var setZeroes = function(matrix) {
-    const rows = [];
-    const cols = [];
+    // m + n 空间
+    // const rows = [];
+    // const cols = [];
+    // const n = matrix.length;
+    // if (!n) {
+    //     return [];
+    // }
+    // const m = matrix[0].length;
+    // for (let i = 0; i < n; i++) {
+    //     for (let j = 0; j < m; j++) {
+    //         if (matrix[i][j] === 0) {
+    //             rows.push(i);
+    //             cols.push(j);
+    //         }
+    //     }
+    // }
+    // for (let i = 0; i < n; i++) {
+    //     for (let j = 0; j < m; j++) {
+    //         if (rows.includes(i) || cols.includes(j)) {
+    //             matrix[i][j] = 0;
+    //         }
+    //     }
+    // }
+    //  常数空间 (1)
     const n = matrix.length;
     if (!n) {
         return [];
     }
     const m = matrix[0].length;
+    let isFirstRowHas0 = false;
     for (let i = 0; i < n; i++) {
-        for (let j = 0; j < m; j++) {
+        if (matrix[i][0] === 0) {
+            isFirstRowHas0 = true;
+            break;
+        }
+    }
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 1; j < m; j++) {
             if (matrix[i][j] === 0) {
-                rows.push(i);
-                cols.push(j);
+                matrix[i][0] = 0;
+                matrix[0][j] = 0;
             }
         }
     }
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < m; j++) {
-            if (rows.includes(i) || cols.includes(j)) {
+
+    for (let i = 1; i < n; i++) {
+        for (let j = 1; j < m; j++) {
+            if (matrix[i][0] === 0 || matrix[0][j] === 0) {
                 matrix[i][j] = 0;
             }
         }
     }
+
+    if (matrix[0][0] === 0) {
+        for (let i = 1; i < m; i++) {
+            matrix[0][i] = 0;
+        }
+    }
+
+    if (isFirstRowHas0) {
+        for (let i = 0; i < n; i++) {
+            matrix[i][0] = 0;
+        }
+    }
+
     return matrix;
 };
 
 console.log(setZeroes([[1, 1, 1], [1, 0, 1], [1, 1, 1]])); //[[1,0,1],[0,0,0],[1,0,1]]
 console.log(setZeroes([[0,1,2,0],[3,4,5,2],[1,3,1,5]]));  //[[0,0,0,0],[0,4,5,0],[0,3,1,0]]
+console.log(setZeroes([[1, 0]]));  //[[0,0,0,0],[0,4,5,0],[0,3,1,0]]
