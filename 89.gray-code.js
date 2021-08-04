@@ -14,5 +14,18 @@ var grayCode = function(n) {
     if (n === 1) {
         return [0, 1]
     }
-    dp = [['0'], ['01', '11']]
+    let pre = ['0', '1'];
+    let cur = 1;
+    while (cur < n) {
+        const length = pre.length;
+        for (let i = length - 1; i >= 0; i--) {
+            pre.push('1' + pre[i]);
+            pre[i] = '0' + pre[i];
+        }
+        cur++;
+    }
+    return pre.map(item => parseInt(item, 2));
 };
+
+console.log(grayCode(2));
+console.log(grayCode(3));
