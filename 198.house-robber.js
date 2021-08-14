@@ -7,16 +7,17 @@
  * @return {number}
  */
 var rob = function(nums) {
-    if (!nums.length) {
+    if (!nums || !nums.length) {
         return 0;
     }
     const dp = [[nums[0], 0]];
-    for (let i = 1; i < nums.length; i++) {
+    const n = nums.length;
+    for (let i = 1; i < n; i++) {
         dp[i] = [];
         dp[i][0] = dp[i - 1][1] + nums[i];
         dp[i][1] = Math.max(dp[i - 1][0], dp[i - 1][1]);
     }
-    return Math.max(dp[dp.length - 1][0], dp[dp.length - 1][1]);
+    return Math.max(...dp[n - 1]);
 };
 
 console.log(rob([1, 2, 3, 1]));
