@@ -25,6 +25,16 @@ var jump = function(nums) {
         dp[i] = min + 1;
     }
     return dp[dp.length - 1];
+
+    // 方法二
+    // const dp = [0];
+    // const n = nums.length;
+    // for (let i = 0; i < n - 1; i++) {
+    //     for (let j = i+ 1; j <= i + nums[i]; j++) {
+    //         dp[j] = Math.min(dp[j] || Infinity, dp[i] + 1);
+    //     }
+    // }
+    // return dp[n - 1];
 };
 
 console.log(jump([2,3,1,1,4])); // 2
