@@ -14,7 +14,6 @@
         return 0;
     }
     const dp = new Array(n).fill(0).map(() => new Array(2).fill(0).map(() => new Array(k + 1).fill(-Infinity)));
-    console.log(dp);
     dp[0][0][0] = 0;
     dp[0][1][0] = -prices[0];
     for (let i = 1; i < n; i++) {
