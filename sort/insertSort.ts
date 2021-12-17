@@ -7,8 +7,8 @@ function insertSort(nums: number[]): number[] {
         }
         for (let j = i - 1; j >= 0; j--) {
             nums[j + 1] = nums[j];
-            nums[j] = target;
             if (j === 0 || target >= nums[j - 1]) {
+                nums[j] = target;
                 break;
             }
         } 
