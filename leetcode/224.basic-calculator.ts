@@ -1,11 +1,20 @@
 // 给你一个字符串表达式 s ，请你实现一个基本计算器来计算并返回它的值。
 // s 由数字、'+'、'-'、'('、')'、和 ' ' 组成
 function calculate(s: string): number {
+    const transS = [];
+    for (let i = 0; i < s.length; i++) {
+        if(s[i] === '-' && (i === 0 || s[i - 1] === '(')) {
+            transS.push('0');
+            transS.push('-');
+        } else {
+            transS.push(s[i]);
+        }
+    }
     // 去掉空格，组装为数组
     const str: string[] = [];
     let lastNum = '';
-    for (let i = 0; i < s.length; i++) {
-        const cur = s[i];
+    for (let i = 0; i < transS.length; i++) {
+        const cur = transS[i];
         if (/\d/.test(cur)) {
             lastNum += cur;
         } else if (cur === ' ') {
@@ -84,7 +93,7 @@ function calculate(s: string): number {
     }
 };
 
-// console.log(calculate("1 + 1")); // 2
+console.log(calculate("1 + 1")); // 2
 console.log(calculate('2 - 1 + 2'));// 3
 console.log(calculate("-2+ 1")); // -1
-// console.log(calculate("(1+(4+5+2)-3)+(6+8)")); // 23
+console.log(calculate("(1+(4+5+2)-3)+(6+8)")); // 23
