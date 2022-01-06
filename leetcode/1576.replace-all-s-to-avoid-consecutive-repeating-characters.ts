@@ -12,6 +12,9 @@
 function modifyString(s: string): string {
     const n = s.length;
     if (n <= 1) {
+        if (s === '?') {
+            return 'a';
+        }
         return s;
     }
     const arr = s.split('');
