@@ -26,5 +26,16 @@ function cloneGraph(node: Node | null): Node | null {
     if (!node) {
         return node;
     }
-    const cloneNode: Node = new Node(node.val, []);
+
+    const map = new Map();
+    return clone(node)
+    function clone(node: Node): Node {
+        if (map.has(node.val)) {
+            return map.get(node.val);
+        }
+        const cloneNode: Node = new Node(node.val, []);
+        map.set(cloneNode.val, cloneNode);
+        cloneNode.neighbors = node.neighbors.map(item => clone(item));
+        return cloneNode; 
+    }
 };
