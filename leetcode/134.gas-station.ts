@@ -40,7 +40,6 @@ function canCompleteCircuit(gas: number[], cost: number[]): number {
             return -1;
         }
     }
-    console.log(gap, maxStart);
     return start;
 };
 
