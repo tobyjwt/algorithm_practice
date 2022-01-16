@@ -30,7 +30,6 @@ function calculate(s: string): number {
     if (lastNum !== '') {
         str.push(lastNum);
     }
-    console.log(toPostExp(str));
     const posts = toPostExp(str);
     return postToResult(posts);
     
