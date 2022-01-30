@@ -11,19 +11,39 @@
  * }
  */
 
+ let front = null;
+
+ function compare(node: ListNode | null): boolean {
+     if (node) {
+         if (!compare(node.next)) {
+             return false;
+         }
+         if (front.val !== node.val) {
+             return false;
+         }
+         front = front.next;
+     }
+     return true;
+ }
+
  function isPalindrome(head: ListNode | null): boolean {
-    const queue = [];
-    let cur = head;
-    while(cur) {
-        queue.push(cur.val);
-        cur = cur.next;
-    }
-    while(queue.length) {
-        const left = queue.shift();
-        const right = queue.pop();
-        if (left !== right && left !== undefined && right !== undefined) {
-            return false;
-        }
-    }
-    return true;
+    front = head;
+    return compare(head);
 };
+
+// function isPalindrome(head: ListNode | null): boolean {
+//     const queue = [];
+//     let cur = head;
+//     while(cur) {
+//         queue.push(cur.val);
+//         cur = cur.next;
+//     }
+//     while(queue.length) {
+//         const left = queue.shift();
+//         const right = queue.pop();
+//         if (left !== right && left !== undefined && right !== undefined) {
+//             return false;
+//         }
+//     }
+//     return true;
+// };
