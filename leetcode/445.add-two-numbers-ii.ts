@@ -14,18 +14,37 @@
  * }
  */
 
- function getNum(head: ListNode | null) {
+ function getNum(head: ListNode | null): number[] {
     const queue = [];
     let cur = head;
     while(cur) {
         queue.push(cur.val);
         cur = cur.next;
     }
-    return Number(queue.join(''));
+    return queue;
+}
+
+function sum(s1: number[], s2: number[]): number[] {
+    let sum: number[] = [];
+    let temp = 0;
+    while(s1.length || s2.length) {
+        const cur = (s1.pop() || 0) + (s2.pop() || 0) + temp;
+        if (cur > 9) {
+            sum.unshift(cur % 10);
+            temp = 1;
+        } else {
+            sum.unshift(cur);
+            temp = 0;
+        }
+    }
+    if (temp !== 0) {
+        sum.unshift(temp);
+    }
+    return sum;
 }
 
 function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNode | null {
-    const arr = (getNum(l1) + getNum(l2)).toString().split('');
+    const arr = sum(getNum(l1), getNum(l2));
     if (!arr.length) {
         return null;
     }
