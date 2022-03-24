@@ -23,7 +23,7 @@ function islandPerimeter(grid: number[][]): number {
     }
     return 0;
 
-    function DFS(r: number, c: number) {
+    function DFS(r: number, c: number): number {
         if (!isInArea(r, c)) {
             return 1;
         }
