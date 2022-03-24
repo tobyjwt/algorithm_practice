@@ -6,6 +6,8 @@
 
 // 计算并返回 grid 中最大的岛屿面积。如果没有岛屿，则返回面积为 0 。
 
+// 和200， 463， 685为系列问题，dp思路参考200
+
 function maxAreaOfIsland(grid: number[][]): number {
     const height = grid.length;
     if (!height) {

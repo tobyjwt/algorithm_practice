@@ -4,6 +4,8 @@
 
 // 此外，你可以假设该网格的四条边均被水包围。
 
+// 思路：深度优先遍历，每一块方格都有上下左右四个分叉，深度优先遍历这四个分叉，将已经遍历过的做好标记，记录初始执行DFS的次数即为岛屿数量
+
 function numIslands(grid: string[][]): number {
     const height = grid.length;
     if (!height) {

@@ -4,6 +4,8 @@
 
 // 岛屿中没有“湖”（“湖” 指水域在岛屿内部且不和岛屿周围的水相连）。格子是边长为 1 的正方形。网格为长方形，且宽度和高度均不超过 100 。计算这个岛屿的周长。
 
+// 和200， 463， 685为系列问题，dp思路参考200
+
 function islandPerimeter(grid: number[][]): number {
     const height = grid.length;
     if (!height) {
