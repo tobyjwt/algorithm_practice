@@ -34,8 +34,8 @@ function canFinish(numCourses: number, prerequisites: number[][]): boolean {
         }
     }
 
-    return !countMap.some(item => item > 0);
-    return count === numCourses;
+    return !countMap.some(item => item > 0); // 判断countMap都为0或者count === numCourses都可以
+    // return count === numCourses;
 };
 
 console.log(canFinish(2, [[1, 0]]));
