@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    .wrap {
+      position: relative;
+      overflow: hidden;
+      width: 200px;
+      height: 121px;
+    }
+
+    .triangle3 {
+      background-color: red;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transform-origin: left bottom;
+      transform: rotate(45deg);
+    }
+
+
+
+    .triangle2 {
+      width: 100px;
+      height: 86px;
+      background-color: red;
+      clip-path: polygon(100% 0, 50% 100%, 0 0);
+    }
+
+    .triangle {
+      height: 0;
+      width: 0;
+      border: 20px solid transparent;
+      border-bottom: 20px solid red;
+    }
+
+    .round {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .round2 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      clip-path: circle(50% at 50% 50%);
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="triangle3"></div>
+</div>
+<!--<div class="triangle"></div>-->
+
+<!--<div class="triangle2"></div>-->
+<!--<div class="round"></div>-->
+<!--<div class="round2"></div>-->
+
+</body>
+</html>
