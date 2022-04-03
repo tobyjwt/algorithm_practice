@@ -18,7 +18,7 @@
         cur = cur.next;
     }
     if (n === length) {
-        return head.next;
+        return (head as ListNode).next;
     }
 
     if (n > length || n < 1) {
