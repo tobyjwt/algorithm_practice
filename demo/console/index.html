@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // console.log = function (...args) {
+    //     alert('console 执行');
+    //     console.log(...args);
+    // }
+    // (() => {
+    //     let a = {};
+    //     a.toString = function () {
+    //         console.log('劫持')
+    //         // alert('劫持');
+    //         return 123;
+    //     };
+    //     console.log(a + '');
+    // })();
+        var t = 0;
+        var e = new Date;
+        e.toString = function() {
+            alert('toString 调用');
+            if (++t > 1) {
+                // window.location.href = "www.baidu.com";
+                alert('Mingzhogn');
+                console.log(t);
+            }
+        }
+        console.log(e);
+</script>
+</body>
+</html>
