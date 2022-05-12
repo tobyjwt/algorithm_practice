@@ -1,3 +1,5 @@
+// https://juejin.cn/post/6974293549135167495#heading-26
+
 class Dep {
     constructor() {
         this.subs = []
@@ -8,7 +10,9 @@ class Dep {
     }
 
     depend() {
-        this.subs.push(Dep.target)
+        if (Dep.target) {
+            Dep.target.addDep(this) // 让watcher,去存放dep，然后里面dep存放对应的watcher，两个是多对多的关系
+        }
     }
 
     notify() {
@@ -20,14 +24,65 @@ class Dep {
 
 Dep.target = null
 
+export function pushTarget(watcher) {
+    // 改变target的指向
+    Dep.target = watcher
+    stack.push(watcher)
+}
+
+export function popTarget() {
+    stack.pop()
+    Dep.target = stack[stack.length - 1]
+}
+
 
 class Watcher {
-    constructor(vm, exp, fn) {
+    constructor(vm, exp, fn, options) {
+        if (options) {
+            this.lazy = !!options.lazy // 为computed 设计的
+        } else {
+            this.lazy = false
+        }
+        this.dirty = this.lazy;
         this.vm = vm
         this.exp = exp
         this.fn = fn
-        Dep.target = this//将自己挂载到 Dep.target，调用 Dep.depend时会读取该变量
         this.vm[exp]
+        this.deps = [];
+        this.depsId = new Set() // dep 已经收集过相同的watcher 就不要重复收集了
+    }
+
+    addDep(dep) {
+        let id = dep.id;
+        if (!this.depsId.has(id)) {
+            this.depsId.add(id);
+            this.deps.push(dep);
+            dep.addSub(this);
+        }
+    }
+
+    // get函数，计算值
+    get() {
+        const vm = this.vm
+        pushTarget(this)
+        // 执行函数
+        let value = this.getter.call(vm, vm)
+        popTarget()
+        return value
+    }
+
+    // 执行get，并且 this.dirty = false
+    evaluate() {
+        this.value = this.get()
+        this.dirty = false
+    }
+
+    // 所有的属性收集当前的watcer
+    depend() {
+        let i = this.deps.length
+        while(i--) {
+            this.deps[i].depend()
+        }
     }
 }
 
